@@ -1,10 +1,22 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './styles.css'
 import heroConstruction from './assets/hero-construction.jpg'
-import heroInterior from './assets/hero-interior.jpg'
 import heroLiving from './assets/hero-living.jpg'
 import projectHome1 from './assets/project-home-1.jpg'
 import projectHome6 from './assets/project-home-6.jpg'
+import buildingResidentialFrontElevation from './assets/building/building-residential-front-elevation.jpg'
+import interiorFalseCeilingLivingRoom from './assets/interior/interior-false-ceiling-living-room.jpg'
+import interiorFalseCeilingDetail from './assets/interior/interior-false-ceiling-detail.jpg'
+import interiorModularKitchenMint from './assets/interior/interior-modular-kitchen-mint.jpeg'
+import interiorTvUnitWoodPanel from './assets/interior/interior-tv-unit-wood-panel.jpeg'
+import interiorWallPanelDisplay from './assets/interior/interior-wall-panel-display.jpeg'
+import interiorFloatingTvUnitShelves from './assets/interior/interior-floating-tv-unit-shelves.jpeg'
+import interiorBlueModularKitchenPartition from './assets/interior/interior-blue-modular-kitchen-partition.jpeg'
+import interiorLivingRoomTvWall from './assets/interior/interior-living-room-tv-wall.jpeg'
+import interiorGeometricCeilingChandelier from './assets/interior/interior-geometric-ceiling-chandelier.jpeg'
+import interiorModernTvPanelWood from './assets/interior/interior-modern-tv-panel-wood.jpeg'
+import interiorGreenCeilingWallPanel from './assets/interior/interior-green-ceiling-wall-panel.jpeg'
+import interiorWoodenFeatureWallUnit from './assets/interior/interior-wooden-feature-wall-unit.jpeg'
 
 const COMPANY_URL = 'https://www.smaatechengineering.com/'
 const CAREERS_URL = 'https://www.smaatechengineering.com/'
@@ -34,19 +46,30 @@ const SERVICES = [
 ]
 
 const PROJECTS = [
-  { cat: 'Building', label: 'Building · Site Work', title: 'City Site Development', img: heroConstruction, wide: true },
-  { cat: 'Interior', label: 'Interior · Residential', title: 'Luxury Living Room', img: heroInterior },
-  { cat: 'Villa', label: 'Independent Villa', title: 'Premium Home Project', img: projectHome1 },
-  { cat: 'Building', label: 'Building · Residential', title: 'Modern Home Elevation', img: projectHome6 },
-  { cat: 'Interior', label: 'Premium Interior', title: 'Elegant Living Space', img: heroLiving },
+  { cat: 'Building', label: 'Building · Residential Elevation', title: 'Residential Front Elevation', img: buildingResidentialFrontElevation, wide: true },
+  { cat: 'Building', label: 'Building · Bhubaneswar Site', title: 'Residential Site Execution', img: heroConstruction },
+  { cat: 'Villa', label: 'Villa · Odisha Home Project', title: 'Independent Villa Development', img: projectHome1 },
+  { cat: 'Building', label: 'Building · Home Elevation', title: 'Modern Residential Elevation', img: projectHome6 },
+  { cat: 'Interior', label: 'Interior · False Ceiling Work', title: 'Premium False Ceiling Interior', img: interiorFalseCeilingLivingRoom },
+  { cat: 'Interior', label: 'Interior · Ceiling Light Detail', title: 'False Ceiling Light Design', img: interiorFalseCeilingDetail },
+  { cat: 'Interior', label: 'Interior · Modular Kitchen', title: 'Mint Modular Kitchen Design', img: interiorModularKitchenMint },
+  { cat: 'Interior', label: 'Interior · Kitchen Partition', title: 'Blue Modular Kitchen Partition', img: interiorBlueModularKitchenPartition },
+  { cat: 'Interior', label: 'Interior · TV Unit Design', title: 'Wood Panel TV Unit Interior', img: interiorTvUnitWoodPanel },
+  { cat: 'Interior', label: 'Interior · Floating Shelves', title: 'Floating TV Unit With Shelves', img: interiorFloatingTvUnitShelves },
+  { cat: 'Interior', label: 'Interior · Living Room Wall', title: 'Living Room TV Feature Wall', img: interiorLivingRoomTvWall },
+  { cat: 'Interior', label: 'Interior · Chandelier Ceiling', title: 'Geometric Ceiling With Chandelier', img: interiorGeometricCeilingChandelier },
+  { cat: 'Interior', label: 'Interior · Modern TV Panel', title: 'Modern Wood TV Panel', img: interiorModernTvPanelWood },
+  { cat: 'Interior', label: 'Interior · Green Accent Design', title: 'Green Ceiling And Wall Panel', img: interiorGreenCeilingWallPanel },
+  { cat: 'Interior', label: 'Interior · Wooden Feature Wall', title: 'Wooden Feature Wall Unit', img: interiorWoodenFeatureWallUnit },
+  { cat: 'Interior', label: 'Interior · Wall Panel Display', title: 'Designer Wall Panel Display', img: interiorWallPanelDisplay },
 ]
 
 const GALLERY = [
-  { cls: 'gi tall', src: heroConstruction, lbl: 'Foundation Work'    },
-  { cls: 'gi',      src: projectHome6,     lbl: 'Steel Framework'    },
-  { cls: 'gi',      src: heroInterior,     lbl: 'Interior Finishing' },
-  { cls: 'gi wide', src: projectHome1,     lbl: 'Final Handover'     },
-  { cls: 'gi',      src: heroLiving,       lbl: 'Design Planning'    },
+  { cls: 'gi tall', src: heroConstruction, lbl: 'On-Site Construction' },
+  { cls: 'gi',      src: projectHome6,     lbl: 'Elevation Review'     },
+  { cls: 'gi',      src: interiorModularKitchenMint, lbl: 'Modular Kitchen'      },
+  { cls: 'gi wide', src: projectHome1,     lbl: 'Villa Development'    },
+  { cls: 'gi',      src: interiorFalseCeilingDetail, lbl: 'Ceiling Light Detail' },
 ]
 
 const STEPS = [
@@ -64,27 +87,28 @@ const WHY = [
 ]
 
 const CLIENTS = [
-  'Residential Clients', 'Commercial Projects', 'Real Estate Partners', 'Interior Clients',
-  'Villa Projects', 'Land Buyers & Sellers', 'Corporate Offices', 'Odisha Developers',
+  'Home Construction Clients', 'Interior Work Clients', 'Villa & Independent Home Owners',
+  'Land Buyers & Sellers', 'Commercial Space Owners', 'Real Estate Partners',
+  'Bhubaneswar Families', 'Odisha Property Clients',
 ]
 
 const TESTIMONIALS = [
   {
     stars: '★★★★★',
-    q: 'SmaaTech built our dream home exactly the way we wanted. The quality of construction is excellent and they handed over on time. The team was always transparent about costs. Very happy with the result!',
-    name: 'Rajesh Panda', role: 'Homeowner – Bhubaneswar',
+    q: 'The team explained the construction plan clearly, kept the work organized on site, and gave regular updates through each stage of the project.',
+    name: 'Residential Client', role: 'Bhubaneswar, Odisha',
     img: projectHome1,
   },
   {
     stars: '★★★★★',
-    q: 'The interior work in our apartment is outstanding. Premium quality materials, beautiful designs, and the team was professional throughout. I recommend them to everyone in Odisha!',
-    name: 'Priyanka Mohanty', role: 'Interior Client – Cuttack',
-    img: heroInterior,
+    q: 'For interior work, the material selection, finish quality, and coordination were handled professionally. The space was delivered with a clean, premium look.',
+    name: 'Interior Client', role: 'Odisha',
+    img: interiorWallPanelDisplay,
   },
   {
     stars: '★★★★★',
-    q: 'Bought a plot through SmaaTech — smooth, legal, and fully transparent process. They guided us at every step. Trustworthy company with honest dealings. Highly recommended!',
-    name: 'Subhash Nayak', role: 'Land Purchase Client – Odisha',
+    q: 'The land and home consultation was transparent from the first discussion. Budget, timeline, and documentation were discussed without confusion.',
+    name: 'Property Client', role: 'Odisha',
     img: projectHome6,
   },
 ]
@@ -192,7 +216,7 @@ function Hero() {
           <div className="hero-photo-tag">Live Site Execution</div>
         </div>
         <div className="hero-photo-card hero-photo-top">
-          <img src={heroInterior} alt="" decoding="async" />
+          <img src={interiorFalseCeilingLivingRoom} alt="" decoding="async" />
         </div>
         <div className="hero-photo-card hero-photo-bottom">
           <img src={heroLiving} alt="" decoding="async" />
@@ -309,7 +333,7 @@ function About() {
           {/* Images */}
           <div className="ab-imgs rv rl">
             <img className="ai1" src={projectHome1} alt="SmaaTech luxury villa project" loading="lazy" decoding="async" />
-            <img className="ai2" src={heroInterior} alt="Premium interior design" loading="lazy" decoding="async" />
+            <img className="ai2" src={interiorWallPanelDisplay} alt="Premium interior design" loading="lazy" decoding="async" />
             <div className="abadge">
               <div className="abn">15+</div>
               <div className="abt">Years of<br />Excellence</div>
@@ -385,7 +409,9 @@ function Projects() {
   const [filter, setFilter] = useState('all')
   const [active, setActive] = useState(null)
   const cats = ['all', 'Building', 'Interior', 'Villa']
-  const visible = PROJECTS.filter(p => filter === 'all' || p.cat === filter)
+  const visible = filter === 'all'
+    ? cats.slice(1).map(cat => PROJECTS.find(p => p.cat === cat)).filter(Boolean)
+    : PROJECTS.filter(p => p.cat === filter)
 
   return (
     <section id="projects" className="sp">
@@ -393,8 +419,8 @@ function Projects() {
         <div className="pj-hd">
           <div>
             <span className="rule" />
-            <span className="lbl">Portfolio</span>
-            <h2 className="ttl" style={{ marginBottom: 0 }}>Featured Projects</h2>
+            <span className="lbl">Work Showcase</span>
+            <h2 className="ttl" style={{ marginBottom: 0 }}>SmaaTech Project Work</h2>
           </div>
           <div className="fb">
             {cats.map(c => (
@@ -413,7 +439,7 @@ function Projects() {
             <button
               key={`${p.title}-${i}`}
               type="button"
-              className={`pc rv d${Math.min(i, 3)}${p.wide ? ' wide' : ''}`}
+              className={`pc${p.wide ? ' wide' : ''}`}
               onClick={() => setActive(p)}
               aria-label={`Open ${p.title} project image`}
             >
@@ -452,9 +478,9 @@ function Gallery() {
       <div className="container">
         <div className="sh c">
           <span className="rule" />
-          <span className="lbl">Construction Progress</span>
-          <h2 className="ttl">Behind the Build</h2>
-          <p className="sub">A glimpse into the craftsmanship and dedication that goes into every SmaaTech project.</p>
+          <span className="lbl">Site & Interior Gallery</span>
+          <h2 className="ttl">Project Execution Moments</h2>
+          <p className="sub">Construction, elevation, villa and interior visuals from the current SmaaTech website assets.</p>
         </div>
       </div>
       <div className="gg">
@@ -562,7 +588,7 @@ function Clients() {
   return (
     <section id="clients">
       <div className="container">
-        <p className="clt">Trusted by families, businesses &amp; developers across Odisha</p>
+        <p className="clt">Serving homeowners, property clients, interior customers and developers across Odisha</p>
       </div>
       <div className="clw">
         <div className="cltr">
@@ -597,9 +623,9 @@ function Testimonials() {
       <div className="container">
         <div className="sh c rv">
           <span className="rule" />
-          <span className="lbl">Client Voices</span>
-          <h2 className="ttl">What Our Clients Say</h2>
-          <p className="sub">Hear from families and businesses who trusted SmaaTech with their dream projects.</p>
+          <span className="lbl">Client Feedback</span>
+          <h2 className="ttl">Service Experience</h2>
+          <p className="sub">Anonymized feedback themes focused on planning clarity, work quality and transparent coordination.</p>
         </div>
 
         <div
