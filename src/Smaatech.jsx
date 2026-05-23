@@ -20,6 +20,9 @@ import interiorWoodenFeatureWallUnit from './assets/interior/interior-wooden-fea
 
 const COMPANY_URL = 'https://www.smaatechengineering.com/'
 const CAREERS_URL = 'https://www.smaatechengineering.com/'
+const MAP_QUERY = 'Bhubaneswar, Odisha'
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`
 const SOCIAL_LINKS = [
   ['Instagram', COMPANY_URL, 'IG'],
   ['LinkedIn', COMPANY_URL, 'in'],
@@ -813,13 +816,22 @@ function Contact() {
 function MapStrip() {
   return (
     <div id="mstr">
-      <img
-        src={projectHome6}
-        alt="SmaaTech Infra & Developer — Bhubaneswar, Odisha"
+      <iframe
+        title="SmaaTech Engineering location map"
+        src={MAP_EMBED_URL}
         loading="lazy"
-        decoding="async"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
       />
-      <div className="mpin">SmaaTech Infra &amp; Developer, Bhubaneswar, Odisha</div>
+      <a
+        className="mpin"
+        href={MAP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Bhubaneswar, Odisha in Google Maps"
+      >
+        Bhubaneswar, Odisha
+      </a>
     </div>
   )
 }
@@ -874,7 +886,7 @@ function Footer() {
               <li><a href="tel:7608061738">📞 7608061738</a></li>
               <li><a href="mailto:Info@smaatechengineering.com">Info@smaatechengineering.com</a></li>
               <li><a href={COMPANY_URL} target="_blank" rel="noopener noreferrer">www.smaatechengineering.com</a></li>
-              <li><a href="#mstr">Bhubaneswar, Odisha</a></li>
+              <li><a href={MAP_LINK} target="_blank" rel="noopener noreferrer">Bhubaneswar, Odisha</a></li>
               <li><a href="#contact">Get a Free Quote</a></li>
             </ul>
           </div>
