@@ -17,14 +17,50 @@ import interiorGeometricCeilingChandelier from './assets/interior/interior-geome
 import interiorModernTvPanelWood from './assets/interior/interior-modern-tv-panel-wood.jpeg'
 import interiorGreenCeilingWallPanel from './assets/interior/interior-green-ceiling-wall-panel.jpeg'
 import interiorWoodenFeatureWallUnit from './assets/interior/interior-wooden-feature-wall-unit.jpeg'
+import {
+  FaArrowRight,
+  FaArrowUp,
+  FaAward,
+  FaBuilding,
+  FaCheckCircle,
+  FaClock,
+  FaComments,
+  FaCouch,
+  FaDraftingCompass,
+  FaEnvelope,
+  FaFacebookF,
+  FaGlobe,
+  FaHandshake,
+  FaHardHat,
+  FaHome,
+  FaInstagram,
+  FaKey,
+  FaLinkedinIn,
+  FaMagic,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaPlay,
+  FaShieldAlt,
+  FaSmile,
+  FaStar,
+  FaTrophy,
+  FaWhatsapp,
+  FaYoutube,
+} from 'react-icons/fa'
 
 const COMPANY_URL = 'https://www.smaatechengineering.com/'
 const CAREERS_URL = 'https://www.smaatechengineering.com/'
+const MAP_QUERY = 'Bhubaneswar, Odisha'
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`
+const WHATSAPP_URL = 'https://wa.me/917608061738'
+const WHATSAPP_ENQUIRY_URL = `${WHATSAPP_URL}?text=${encodeURIComponent("Hi SmaaTech! I'm interested in your services.")}`
+const ENQUIRY_EMAIL = 'Info@smaatechengineering.com'
 const SOCIAL_LINKS = [
-  ['Instagram', COMPANY_URL, 'IG'],
-  ['LinkedIn', COMPANY_URL, 'in'],
-  ['YouTube', COMPANY_URL, 'YT'],
-  ['Facebook', COMPANY_URL, 'f'],
+  ['Instagram', COMPANY_URL, FaInstagram],
+  ['LinkedIn', COMPANY_URL, FaLinkedinIn],
+  ['YouTube', COMPANY_URL, FaYoutube],
+  ['Facebook', COMPANY_URL, FaFacebookF],
 ]
 
 // ─────────────────────────────────────────
@@ -38,11 +74,11 @@ const TICKER_ITEMS = [
 ]
 
 const SERVICES = [
-  { n: '01', ico: '🏢', title: 'Building', desc: 'Residential and commercial building construction with quality materials, skilled workforce, and strict quality control at every stage of the project.' },
-  { n: '02', ico: '🛋', title: 'Interior Work', desc: 'Complete interior work — false ceiling, flooring, carpentry, painting — all under one roof with premium finishes and timely delivery.' },
-  { n: '03', ico: '🤝', title: 'Land Sale & Purchase', desc: 'Trusted land dealing with transparent pricing, legal verification, and expert guidance for residential and commercial plots in Odisha.' },
-  { n: '04', ico: '🏡', title: 'Independent Home & Villa', desc: 'Custom-designed independent homes and luxury villas built to your dream specifications — from foundation to final handover.' },
-  { n: '05', ico: '✨', title: 'Premium Interior Design', desc: 'High-end interior design for homes, offices, and commercial spaces. Stunning, functional, and timeless interiors that reflect your lifestyle.' },
+  { n: '01', title: 'Building', desc: 'Residential and commercial building construction with quality materials, skilled workforce, and strict quality control at every stage of the project.' },
+  { n: '02', title: 'Interior Work', desc: 'Complete interior work — false ceiling, flooring, carpentry, painting — all under one roof with premium finishes and timely delivery.' },
+  { n: '03', title: 'Land Sale & Purchase', desc: 'Trusted land dealing with transparent pricing, legal verification, and expert guidance for residential and commercial plots in Odisha.' },
+  { n: '04', title: 'Independent Home & Villa', desc: 'Custom-designed independent homes and luxury villas built to your dream specifications — from foundation to final handover.' },
+  { n: '05', title: 'Premium Interior Design', desc: 'High-end interior design for homes, offices, and commercial spaces. Stunning, functional, and timeless interiors that reflect your lifestyle.' },
 ]
 
 const PROJECTS = [
@@ -73,17 +109,17 @@ const GALLERY = [
 ]
 
 const STEPS = [
-  { n: '01', ico: '💬', title: 'Consultation',      desc: 'We understand your vision, requirement, budget, and timeline in a free detailed consultation session.' },
-  { n: '02', ico: '📐', title: 'Design & Planning', desc: 'Detailed drawings, 3D views, material schedule, and transparent cost estimates prepared by our expert team.' },
-  { n: '03', ico: '🏗', title: 'Construction',       desc: 'Quality materials, skilled workforce, regular site visits, and progress updates at every milestone.' },
-  { n: '04', ico: '🔑', title: 'Handover',           desc: 'Final quality check, documentation, and formal handover — on time, every time. Your dream, delivered.' },
+  { n: '01', title: 'Consultation',      desc: 'We understand your vision, requirement, budget, and timeline in a free detailed consultation session.' },
+  { n: '02', title: 'Design & Planning', desc: 'Detailed drawings, 3D views, material schedule, and transparent cost estimates prepared by our expert team.' },
+  { n: '03', title: 'Construction',       desc: 'Quality materials, skilled workforce, regular site visits, and progress updates at every milestone.' },
+  { n: '04', title: 'Handover',           desc: 'Final quality check, documentation, and formal handover — on time, every time. Your dream, delivered.' },
 ]
 
 const WHY = [
-  { ico: '🛡', title: 'Quality You Can Trust',   desc: 'Premium materials and skilled professionals ensure every project meets the highest quality standards without compromise.' },
-  { ico: '✅', title: 'Transparent Dealings',    desc: 'No hidden costs, no surprises. Full transparency in pricing, contracts, land documents, and all project updates.' },
-  { ico: '⏱', title: 'On Time Delivery',        desc: 'We respect your time. Every SmaaTech project is planned and executed to be delivered on the committed date.' },
-  { ico: '😊', title: 'Customer Satisfaction',  desc: 'Our 98% client satisfaction rate speaks for itself. Your happiness is our ultimate goal and greatest achievement.' },
+  { title: 'Quality You Can Trust',   desc: 'Premium materials and skilled professionals ensure every project meets the highest quality standards without compromise.' },
+  { title: 'Transparent Dealings',    desc: 'No hidden costs, no surprises. Full transparency in pricing, contracts, land documents, and all project updates.' },
+  { title: 'On Time Delivery',        desc: 'We respect your time. Every SmaaTech project is planned and executed to be delivered on the committed date.' },
+  { title: 'Customer Satisfaction',  desc: 'Our 98% client satisfaction rate speaks for itself. Your happiness is our ultimate goal and greatest achievement.' },
 ]
 
 const CLIENTS = [
@@ -94,19 +130,16 @@ const CLIENTS = [
 
 const TESTIMONIALS = [
   {
-    stars: '★★★★★',
     q: 'The team explained the construction plan clearly, kept the work organized on site, and gave regular updates through each stage of the project.',
     name: 'Residential Client', role: 'Bhubaneswar, Odisha',
     img: projectHome1,
   },
   {
-    stars: '★★★★★',
     q: 'For interior work, the material selection, finish quality, and coordination were handled professionally. The space was delivered with a clean, premium look.',
     name: 'Interior Client', role: 'Odisha',
     img: interiorWallPanelDisplay,
   },
   {
-    stars: '★★★★★',
     q: 'The land and home consultation was transparent from the first discussion. Budget, timeline, and documentation were discussed without confusion.',
     name: 'Property Client', role: 'Odisha',
     img: projectHome6,
@@ -114,15 +147,53 @@ const TESTIMONIALS = [
 ]
 
 const VALUES = [
-  { ico: '🛡', lbl: 'Quality',      strong: 'You Can Trust' },
-  { ico: '😊', lbl: 'Customer',     strong: 'Satisfaction'  },
-  { ico: '✅', lbl: 'Transparent',  strong: 'Dealings'      },
-  { ico: '⏱', lbl: 'On Time',      strong: 'Delivery'      },
-  { ico: '🏆', lbl: 'Commitment',   strong: 'For Excellence'},
+  { lbl: 'Quality',      strong: 'You Can Trust' },
+  { lbl: 'Customer',     strong: 'Satisfaction'  },
+  { lbl: 'Transparent',  strong: 'Dealings'      },
+  { lbl: 'On Time',      strong: 'Delivery'      },
+  { lbl: 'Commitment',   strong: 'For Excellence'},
 ]
 
 const FT_SERVICES  = ['Building Construction','Interior Work','Land Sale & Purchase','Independent Home & Villa','Premium Interior Design']
 const FT_COMPANY   = [['#about','About Us'],['#projects','Our Projects'],['#process','Our Process'],['#why','Why Choose Us'],['#testimonials','Testimonials'],[CAREERS_URL,'Careers']]
+
+const SERVICE_ICONS = {
+  Building: FaBuilding,
+  'Interior Work': FaCouch,
+  'Land Sale & Purchase': FaHandshake,
+  'Independent Home & Villa': FaHome,
+  'Premium Interior Design': FaMagic,
+}
+
+const STEP_ICONS = {
+  Consultation: FaComments,
+  'Design & Planning': FaDraftingCompass,
+  Construction: FaHardHat,
+  Handover: FaKey,
+}
+
+const WHY_ICONS = {
+  'Quality You Can Trust': FaShieldAlt,
+  'Transparent Dealings': FaCheckCircle,
+  'On Time Delivery': FaClock,
+  'Customer Satisfaction': FaSmile,
+}
+
+const VALUE_ICONS = {
+  Quality: FaShieldAlt,
+  Customer: FaSmile,
+  Transparent: FaCheckCircle,
+  'On Time': FaClock,
+  Commitment: FaTrophy,
+}
+
+const CONTACT_ICONS = {
+  Address: FaMapMarkerAlt,
+  Phone: FaPhoneAlt,
+  Email: FaEnvelope,
+  Website: FaGlobe,
+  'Working Hours': FaClock,
+}
 
 // ─────────────────────────────────────────
 // HOOK — SCROLL REVEAL
@@ -206,7 +277,7 @@ function Hero() {
           <a href="#contact" className="hero-outline">Get a Free Quote</a>
         </div>
         <div className="h-contact">
-          <a href="tel:7608061738">📞 7608061738</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /> 7608061738</a>
           <a href={COMPANY_URL} target="_blank" rel="noopener noreferrer">smaatechengineering.com</a>
         </div>
       </div>
@@ -258,7 +329,7 @@ function ValuesBar() {
       <div className="vb-grid">
         {VALUES.map((v, i) => (
           <div key={i} className={`vbi rv d${Math.min(i, 3)}`}>
-            <span className="vbi-ico">{v.ico}</span>
+            <span className="vbi-ico">{(() => { const Icon = VALUE_ICONS[v.lbl]; return Icon ? <Icon aria-hidden="true" /> : null })()}</span>
             <div className="vbi-txt">
               {v.lbl}<br />
               <strong>{v.strong}</strong>
@@ -277,7 +348,7 @@ function Stats() {
   const targets  = [250, 15, 80, 98]
   const suffixes = ['+', '+', '+', '%']
   const labels   = ['Projects Completed', 'Years of Excellence', 'Expert Team Members', 'Client Satisfaction']
-  const icons    = ['🏗', '🏅', '👷', '⭐']
+  const icons    = [FaBuilding, FaAward, FaHardHat, FaStar]
   const [vals, setVals] = useState([0, 0, 0, 0])
   const ran = useRef(false)
 
@@ -311,7 +382,7 @@ function Stats() {
       <div className="stats-g">
         {targets.map((_, i) => (
           <div key={i} className={`sb rv d${i}`}>
-            <div className="si">{icons[i]}</div>
+            <div className="si">{(() => { const Icon = icons[i]; return <Icon aria-hidden="true" /> })()}</div>
             <div className="sn">{vals[i]}{suffixes[i]}</div>
             <div className="sl">{labels[i]}</div>
           </div>
@@ -363,7 +434,7 @@ function About() {
             </div>
             <div className="abbs">
               <a href="#services" className="btn-g">Our Services</a>
-              <a href="tel:7608061738" className="btn-o">📞 Call Now</a>
+              <a href={WHATSAPP_URL} className="btn-o" target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /> WhatsApp Now</a>
             </div>
           </div>
 
@@ -390,10 +461,10 @@ function Services() {
           {SERVICES.map((s, i) => (
             <div key={i} className={`svc rv d${i % 3}`}>
               <div className="svn">{s.n}</div>
-              <div className="svico">{s.ico}</div>
+              <div className="svico">{(() => { const Icon = SERVICE_ICONS[s.title]; return Icon ? <Icon aria-hidden="true" /> : null })()}</div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
-              <a href="#contact" className="svlnk">Get a Quote →</a>
+              <a href="#contact" className="svlnk">Get a Quote <FaArrowRight aria-hidden="true" /></a>
             </div>
           ))}
         </div>
@@ -513,7 +584,7 @@ function VideoSection() {
           rel="noopener noreferrer"
           aria-label="Visit SmaaTech Engineering website"
         >
-          ▶
+          <FaPlay aria-hidden="true" />
         </a>
         <h3>Visit SmaaTech Engineering</h3>
         <p>Explore the official company website for more details about our work and services.</p>
@@ -538,9 +609,9 @@ function Process() {
         <div className="prg">
           {STEPS.map((s, i) => (
             <div key={i} className={`prs rv d${i}`}>
-              {i < 3 && <div className="praro">→</div>}
+              {i < 3 && <div className="praro"><FaArrowRight aria-hidden="true" /></div>}
               <div className="prn">{s.n}</div>
-              <div className="prico">{s.ico}</div>
+              <div className="prico">{(() => { const Icon = STEP_ICONS[s.title]; return Icon ? <Icon aria-hidden="true" /> : null })()}</div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
@@ -567,7 +638,7 @@ function Why() {
         <div className="wyg">
           {WHY.map((w, i) => (
             <div key={i} className={`wyc rv ${i % 2 === 0 ? 'rl' : 'rr'}`}>
-              <div className="wyico">{w.ico}</div>
+              <div className="wyico">{(() => { const Icon = WHY_ICONS[w.title]; return Icon ? <Icon aria-hidden="true" /> : null })()}</div>
               <div>
                 <h3>{w.title}</h3>
                 <p>{w.desc}</p>
@@ -640,7 +711,9 @@ function Testimonials() {
             {TESTIMONIALS.map((t, i) => (
               <div key={i} className="tsl">
                 <div className="tin">
-                  <div className="tst">{t.stars}</div>
+                  <div className="tst" aria-label="5 star rating">
+                    {Array.from({ length: 5 }).map((_, star) => <FaStar key={star} aria-hidden="true" />)}
+                  </div>
                   <p className="tq">{t.q}</p>
                   <div className="tau">
                     <img className="tav" src={t.img} alt={t.name} loading="lazy" decoding="async" />
@@ -674,11 +747,11 @@ function Testimonials() {
 // CONTACT
 // ─────────────────────────────────────────
 const CONTACT_INFO = [
-  { ico: '📍', lbl: 'Address',      val: 'Bhubaneswar, Odisha' },
-  { ico: '📞', lbl: 'Phone',        val: <a href="tel:7608061738" style={{ color: 'inherit', fontWeight: 700 }}>7608061738</a> },
-  { ico: '✉',  lbl: 'Email',        val: <a href="mailto:Info@smaatechengineering.com" style={{ color: 'inherit' }}>Info@smaatechengineering.com</a> },
-  { ico: '🌐', lbl: 'Website',      val: <a href={COMPANY_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>www.smaatechengineering.com</a> },
-  { ico: '⏰', lbl: 'Working Hours', val: <span>Mon–Sat: 9:00 AM – 7:00 PM<br />Sunday: By Appointment Only</span> },
+  { lbl: 'Address',      val: 'Bhubaneswar, Odisha' },
+  { lbl: 'Phone',        val: <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', fontWeight: 700 }}>7608061738</a> },
+  { lbl: 'Email',        val: <a href={`mailto:${ENQUIRY_EMAIL}`} style={{ color: 'inherit' }}>{ENQUIRY_EMAIL}</a> },
+  { lbl: 'Website',      val: <a href={COMPANY_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>www.smaatechengineering.com</a> },
+  { lbl: 'Working Hours', val: <span>Mon–Sat: 9:00 AM – 7:00 PM<br />Sunday: By Appointment Only</span> },
 ]
 
 const EMPTY_FORM = { name: '', phone: '', email: '', service: '', details: '' }
@@ -689,46 +762,59 @@ function Contact() {
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    if (!form.name || !form.phone || !form.service) {
-      setMsg({ text: '⚠ Please fill all required fields.', type: 'err' })
-      setTimeout(() => setMsg({ text: '', type: '' }), 4000)
-      return
-    }
-    setMsg({ text: '✓ Thank you! We will contact you within 24 hours.', type: 'ok' })
-    setForm(EMPTY_FORM)
-    setTimeout(() => setMsg({ text: '', type: '' }), 7000)
+  const getCleanForm = () => ({
+    name: form.name.trim(),
+    phone: form.phone.trim(),
+    email: form.email.trim(),
+    service: form.service.trim(),
+    details: form.details.trim(),
+  })
+
+  const getEnquiryText = clean => [
+    'New SmaaTech enquiry',
+    `Name: ${clean.name}`,
+    `Phone: ${clean.phone}`,
+    clean.email ? `Email: ${clean.email}` : '',
+    `Service: ${clean.service}`,
+    clean.details ? `Details: ${clean.details}` : '',
+  ].filter(Boolean).join('\n')
+
+  const validateCleanForm = clean => {
+    if (clean.name && clean.phone && clean.service) return true
+    setMsg({ text: 'Please fill Full Name, Phone and Service before sending enquiry.', type: 'err' })
+    setTimeout(() => setMsg({ text: '', type: '' }), 4000)
+    return false
   }
 
-  const handleWhatsAppSubmit = e => {
+  const getEmailComposeUrl = (clean = getCleanForm()) => {
+    const subject = clean.service ? `SmaaTech Project Enquiry - ${clean.service}` : 'SmaaTech Project Enquiry'
+    const body = clean.name || clean.phone || clean.email || clean.service || clean.details
+      ? getEnquiryText(clean)
+      : 'Hi SmaaTech,\n\nI want to enquire about your services.'
+
+    const params = new URLSearchParams({
+      view: 'cm',
+      fs: '1',
+      to: ENQUIRY_EMAIL,
+      su: subject,
+      body,
+    })
+
+    return `https://mail.google.com/mail/?${params.toString()}`
+  }
+
+  const handleMailClick = e => {
+    const clean = getCleanForm()
+    if (!validateCleanForm(clean)) e.preventDefault()
+  }
+
+  const handleMailSubmit = e => {
     e.preventDefault()
-    const clean = {
-      name: form.name.trim(),
-      phone: form.phone.trim(),
-      email: form.email.trim(),
-      service: form.service.trim(),
-      details: form.details.trim(),
-    }
+    const clean = getCleanForm()
+    if (!validateCleanForm(clean)) return
 
-    if (!clean.name || !clean.phone || !clean.service) {
-      setMsg({ text: 'Please fill all required fields.', type: 'err' })
-      setTimeout(() => setMsg({ text: '', type: '' }), 4000)
-      return
-    }
-
-    const enquiry = [
-      'New SmaaTech enquiry',
-      `Name: ${clean.name}`,
-      `Phone: ${clean.phone}`,
-      clean.email ? `Email: ${clean.email}` : '',
-      `Service: ${clean.service}`,
-      clean.details ? `Details: ${clean.details}` : '',
-    ].filter(Boolean).join('\n')
-
-    const whatsappUrl = `https://wa.me/917608061738?text=${encodeURIComponent(enquiry)}`
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
-    setMsg({ text: 'Enquiry is ready on WhatsApp. Please tap Send to share it with us.', type: 'ok' })
+    window.open(getEmailComposeUrl(clean), '_blank', 'noopener,noreferrer')
+    setMsg({ text: 'Email draft is ready in Gmail. Please tap Send to share it with us.', type: 'ok' })
     setForm(EMPTY_FORM)
     setTimeout(() => setMsg({ text: '', type: '' }), 7000)
   }
@@ -748,7 +834,7 @@ function Contact() {
           <div>
             {CONTACT_INFO.map((r, i) => (
               <div key={i} className={`cir rv rl d${Math.min(i, 3)}`}>
-                <div className="cico">{r.ico}</div>
+                <div className="cico">{(() => { const Icon = CONTACT_ICONS[r.lbl]; return Icon ? <Icon aria-hidden="true" /> : null })()}</div>
                 <div>
                   <div className="cilbl">{r.lbl}</div>
                   <div className="cival">{r.val}</div>
@@ -759,7 +845,7 @@ function Contact() {
 
           {/* Form */}
           <div>
-            <form onSubmit={handleWhatsAppSubmit} noValidate>
+            <form onSubmit={handleMailSubmit} noValidate>
               <div className="cof-g">
                 <div className="fg rv">
                   <label htmlFor="f-name">Full Name *</label>
@@ -786,11 +872,14 @@ function Contact() {
                 </div>
                 <div className="full">
                   <button type="submit" className="btn-g" style={{ width: '100%', justifyContent: 'center', padding: '15px', fontSize: '.9rem' }}>
-                    Send Enquiry →
+                    Send Enquiry <FaArrowRight aria-hidden="true" />
                   </button>
                   <a
                     className="mail-fallback"
-                    href="mailto:Info@smaatechengineering.com?subject=SmaaTech%20Project%20Enquiry"
+                    href={getEmailComposeUrl()}
+                    onClick={handleMailClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Prefer email? Send enquiry by mail
                   </a>
@@ -813,13 +902,23 @@ function Contact() {
 function MapStrip() {
   return (
     <div id="mstr">
-      <img
-        src={projectHome6}
-        alt="SmaaTech Infra & Developer — Bhubaneswar, Odisha"
+      <iframe
+        title="SmaaTech Engineering location map"
+        src={MAP_EMBED_URL}
         loading="lazy"
-        decoding="async"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
       />
-      <div className="mpin">SmaaTech Infra &amp; Developer, Bhubaneswar, Odisha</div>
+      <a
+        className="mpin"
+        href={MAP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Bhubaneswar, Odisha in Google Maps"
+      >
+        <FaMapMarkerAlt aria-hidden="true" />
+        Bhubaneswar, Odisha
+      </a>
     </div>
   )
 }
@@ -839,10 +938,10 @@ function Footer() {
             <div className="ft-sub">Infra &amp; Developer</div>
             <p className="fttg">A unit of SmaaTech Engineering Pvt. Ltd.<br />Building Trust. Creating Futures.</p>
             <div className="fts">
-              {SOCIAL_LINKS.map(([label, href, text]) => (
-                <a key={label} href={href} className="fsa" aria-label={label} target="_blank" rel="noopener noreferrer">{text}</a>
+              {SOCIAL_LINKS.map(([label, href, Icon]) => (
+                <a key={label} href={href} className="fsa" aria-label={label} target="_blank" rel="noopener noreferrer"><Icon aria-hidden="true" /></a>
               ))}
-              <a href="https://wa.me/917608061738" className="fsa" aria-label="WhatsApp">💬</a>
+              <a href={WHATSAPP_URL} className="fsa" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /></a>
             </div>
           </div>
 
@@ -871,10 +970,10 @@ function Footer() {
           <div className="ftc">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:7608061738">📞 7608061738</a></li>
-              <li><a href="mailto:Info@smaatechengineering.com">Info@smaatechengineering.com</a></li>
+              <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /> 7608061738</a></li>
+              <li><a href={`mailto:${ENQUIRY_EMAIL}`}>{ENQUIRY_EMAIL}</a></li>
               <li><a href={COMPANY_URL} target="_blank" rel="noopener noreferrer">www.smaatechengineering.com</a></li>
-              <li><a href="#mstr">Bhubaneswar, Odisha</a></li>
+              <li><a href={MAP_LINK} target="_blank" rel="noopener noreferrer">Bhubaneswar, Odisha</a></li>
               <li><a href="#contact">Get a Free Quote</a></li>
             </ul>
           </div>
@@ -905,7 +1004,7 @@ function BackToTop({ vis }) {
       aria-label="Scroll back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      ↑
+      <FaArrowUp aria-hidden="true" />
     </button>
   )
 }
@@ -917,13 +1016,13 @@ function WhatsApp() {
   return (
     <a
       id="wa"
-      href="https://wa.me/917608061738?text=Hi%20SmaaTech!%20I%27m%20interested%20in%20your%20services."
+      href={WHATSAPP_ENQUIRY_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with SmaaTech on WhatsApp"
     >
       <span className="watip">Chat with us on WhatsApp</span>
-      💬
+      <FaWhatsapp aria-hidden="true" />
     </a>
   )
 }
