@@ -172,7 +172,40 @@ const VALUES = [
 ]
 
 const FT_SERVICES  = ['Building Construction','Interior Work','Land Sale & Purchase','Independent Home & Villa','Premium Interior Design']
-const FT_COMPANY   = [['#about','About Us'],['#projects','Our Projects'],['#process','Our Process'],['#why','Why Choose Us'],['#testimonials','Testimonials'],[CAREERS_URL,'Careers']]
+const FT_COMPANY   = [['#/about','About Us'],['#/projects','Our Projects'],['#/process','Our Process'],['#/about','Why Choose Us'],['#/about','Testimonials'],[CAREERS_URL,'Careers']]
+
+const PAGE_ROUTES = {
+  about: {
+    title: 'About SmaaTech',
+    label: 'Company Profile',
+    desc: 'Know the people, values and execution approach behind SmaaTech Infra & Developer.',
+    image: projectHome1,
+  },
+  services: {
+    title: 'Our Services',
+    label: 'What We Build',
+    desc: 'Construction, interiors, land solutions and villa development handled with clear planning.',
+    image: interiorFalseCeilingLivingRoom,
+  },
+  projects: {
+    title: 'Project Showcase',
+    label: 'Recent Work',
+    desc: 'A focused look at building, villa and interior work from the SmaaTech portfolio.',
+    image: buildingPolishedFacadeWide,
+  },
+  process: {
+    title: 'Our Process',
+    label: 'How We Work',
+    desc: 'From consultation to final handover, every stage is planned for clarity and quality.',
+    image: heroConstruction,
+  },
+  contact: {
+    title: 'Contact SmaaTech',
+    label: 'Start Your Project',
+    desc: 'Share your project requirement and get clear next steps from the SmaaTech team.',
+    image: buildingResidentialFrontElevation,
+  },
+}
 
 const SERVICE_ICONS = {
   Building: FaBuilding,
@@ -215,7 +248,7 @@ const CONTACT_ICONS = {
 // ─────────────────────────────────────────
 // HOOK — SCROLL REVEAL
 // ─────────────────────────────────────────
-function useReveal() {
+function useReveal(dep = '') {
   useEffect(() => {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -224,7 +257,7 @@ function useReveal() {
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' })
     document.querySelectorAll('.rv').forEach(el => obs.observe(el))
     return () => obs.disconnect()
-  }, [])
+  }, [dep])
 }
 
 // ─────────────────────────────────────────
@@ -243,21 +276,22 @@ function Preloader({ hide }) {
 // ─────────────────────────────────────────
 // NAVBAR
 // ─────────────────────────────────────────
-function Navbar({ stuck }) {
+function Navbar({ stuck, currentPage }) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
-  const NAV = [['#about','About'],['#services','Services'],['#projects','Projects'],['#process','Process'],['#contact','Contact']]
+  const NAV = [['#/about','About'],['#/services','Services'],['#/projects','Projects'],['#/process','Process'],['#/contact','Contact']]
   return (
     <nav className={`nav${stuck ? ' sk' : ''}`}>
       <div className="nav-in">
-        <a href="#hero" className="nav-logo" onClick={close}>
-          Smaa<span>Tech</span><em>Infra &amp; Developer</em>
+        <a href="#/" className="nav-logo" onClick={close}>
+          <img src="/logo.png" alt="SmaaTech Logo" className="nav-logo-img" />
+          <span className="nav-logo-text">Smaa<span>Tech</span><em>Infra &amp; Developer</em></span>
         </a>
         <div className={`nav-links${open ? ' open' : ''}`}>
           {NAV.map(([href, label]) => (
-            <a key={href} href={href} onClick={close}>{label}</a>
+            <a key={href} href={href} className={currentPage === href.slice(2) ? 'active' : ''} onClick={close}>{label}</a>
           ))}
-          <a href="#contact" className="ncta" onClick={close}>Get Quote</a>
+          <a href="#/contact" className="ncta" onClick={close}>Get Quote</a>
         </div>
         <button
           className={`hbg${open ? ' open' : ''}`}
@@ -290,8 +324,8 @@ function Hero() {
           delivered with clear planning, quality execution and on-time handover.
         </p>
         <div className="hbs">
-          <a href="#services" className="btn-g">Our Services ↗</a>
-          <a href="#contact" className="hero-outline">Get a Free Quote</a>
+          <a href="#/services" className="btn-g">Our Services ↗</a>
+          <a href="#/contact" className="hero-outline">Get a Free Quote</a>
         </div>
         <div className="h-contact">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /> 7608061738</a>
@@ -450,7 +484,7 @@ function About() {
               ].map((t, i) => <div key={i} className="abli">{t}</div>)}
             </div>
             <div className="abbs">
-              <a href="#services" className="btn-g">Our Services</a>
+              <a href="#/services" className="btn-g">Our Services</a>
               <a href={WHATSAPP_URL} className="btn-o" target="_blank" rel="noopener noreferrer"><FaWhatsapp aria-hidden="true" /> WhatsApp Now</a>
             </div>
           </div>
@@ -481,7 +515,7 @@ function Services() {
               <div className="svico">{(() => { const Icon = SERVICE_ICONS[s.title]; return Icon ? <Icon aria-hidden="true" /> : null })()}</div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
-              <a href="#contact" className="svlnk">Get a Quote <FaArrowRight aria-hidden="true" /></a>
+              <a href="#/contact" className="svlnk">Get a Quote <FaArrowRight aria-hidden="true" /></a>
             </div>
           ))}
         </div>
@@ -705,6 +739,7 @@ function Testimonials() {
   useEffect(() => { startAuto(); return () => clearInterval(autoRef.current) }, [startAuto])
 
   const handleDot = i => { clearInterval(autoRef.current); goTo(i); startAuto() }
+  const handleSlide = dir => { clearInterval(autoRef.current); goTo(cur + dir); startAuto() }
 
   return (
     <section id="testimonials" className="sp">
@@ -728,15 +763,18 @@ function Testimonials() {
             {TESTIMONIALS.map((t, i) => (
               <div key={i} className="tsl">
                 <div className="tin">
-                  <div className="tst" aria-label="5 star rating">
-                    {Array.from({ length: 5 }).map((_, star) => <FaStar key={star} aria-hidden="true" />)}
-                  </div>
-                  <p className="tq">{t.q}</p>
-                  <div className="tau">
-                    <img className="tav" src={t.img} alt={t.name} loading="lazy" decoding="async" />
-                    <div>
-                      <div className="tnm">{t.name}</div>
-                      <div className="tro">{t.role}</div>
+                  <div className="tcopy">
+                    <div className="tquote-mark" aria-hidden="true">“</div>
+                    <div className="tst" aria-label="5 star rating">
+                      {Array.from({ length: 5 }).map((_, star) => <FaStar key={star} aria-hidden="true" />)}
+                    </div>
+                    <p className="tq">{t.q}</p>
+                    <div className="tau">
+                      <img className="tav" src={t.img} alt={t.name} loading="lazy" decoding="async" />
+                      <div>
+                        <div className="tnm">{t.name}</div>
+                        <div className="tro">{t.role}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -745,15 +783,23 @@ function Testimonials() {
           </div>
         </div>
 
-        <div className="tdt">
-          {TESTIMONIALS.map((_, i) => (
-            <button
-              key={i}
-              className={`tdot${cur === i ? ' a' : ''}`}
-              onClick={() => handleDot(i)}
-              aria-label={`Go to testimonial ${i + 1}`}
-            />
-          ))}
+        <div className="tctrl">
+          <button type="button" className="tarr prev" onClick={() => handleSlide(-1)} aria-label="Previous testimonial">
+            <FaArrowRight aria-hidden="true" />
+          </button>
+          <div className="tdt">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                className={`tdot${cur === i ? ' a' : ''}`}
+                onClick={() => handleDot(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+              />
+            ))}
+          </div>
+          <button type="button" className="tarr" onClick={() => handleSlide(1)} aria-label="Next testimonial">
+            <FaArrowRight aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>
@@ -998,7 +1044,7 @@ function Footer() {
           {/* Services */}
           <div className="ftc">
             <h4>Services</h4>
-            <ul>{FT_SERVICES.map(s => <li key={s}><a href="#services">{s}</a></li>)}</ul>
+            <ul>{FT_SERVICES.map(s => <li key={s}><a href="#/services">{s}</a></li>)}</ul>
           </div>
 
           {/* Company */}
@@ -1024,7 +1070,7 @@ function Footer() {
               <li><a href={`mailto:${ENQUIRY_EMAIL}`}>{ENQUIRY_EMAIL}</a></li>
               <li><a href={COMPANY_URL} target="_blank" rel="noopener noreferrer">www.smaatechengineering.com</a></li>
               <li><a href={MAP_LINK} target="_blank" rel="noopener noreferrer">Bhubaneswar, Odisha</a></li>
-              <li><a href="#contact">Get a Free Quote</a></li>
+              <li><a href="#/contact">Get a Free Quote</a></li>
             </ul>
           </div>
 
@@ -1080,13 +1126,96 @@ function WhatsApp() {
 // ─────────────────────────────────────────
 // MAIN APP
 // ─────────────────────────────────────────
+function getPageFromHash() {
+  const route = window.location.hash.replace(/^#\/?/, '').toLowerCase()
+  return PAGE_ROUTES[route] ? route : 'home'
+}
+
+function PageHero({ page }) {
+  const route = PAGE_ROUTES[page]
+
+  if (!route) return null
+
+  return (
+    <section className="page-hero">
+      <img src={route.image} alt="" decoding="async" />
+      <div className="page-hero-ov" />
+      <div className="container page-hero-in">
+        <a className="page-back" href="#/">Home</a>
+        <span className="page-kicker">{route.label}</span>
+        <h1>{route.title}</h1>
+        <p>{route.desc}</p>
+      </div>
+    </section>
+  )
+}
+
+function PageContent({ page }) {
+  switch (page) {
+    case 'about':
+      return (
+        <>
+          <About />
+          <ValuesBar />
+          <Why />
+          <Testimonials />
+        </>
+      )
+    case 'services':
+      return (
+        <>
+          <Services />
+          <Process />
+          <Why />
+        </>
+      )
+    case 'projects':
+      return (
+        <>
+          <Projects />
+          <Gallery />
+        </>
+      )
+    case 'process':
+      return (
+        <>
+          <Process />
+          <Stats />
+          <Why />
+        </>
+      )
+    case 'contact':
+      return (
+        <>
+          <Contact />
+          <MapStrip />
+        </>
+      )
+    default:
+      return null
+  }
+}
+
+function AnimatedPage({ page }) {
+  return (
+    <main key={page} className={`page-view page-${page}`}>
+      <PageHero page={page} />
+      <div className="page-content">
+        <PageContent page={page} />
+      </div>
+    </main>
+  )
+}
+
 export default function SmaaTech() {
   const [plHide,   setPlHide]   = useState(false)
   const [navStuck, setNavStuck] = useState(false)
   const [bttVis,   setBttVis]   = useState(false)
+  const [page, setPage] = useState(() => getPageFromHash())
+  const isHome = page === 'home'
 
   // Activate scroll reveal
-  useReveal()
+  useReveal(page)
 
   // Preloader — hide after 2.2s (fallback 3.6s)
   useEffect(() => {
@@ -1105,25 +1234,42 @@ export default function SmaaTech() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const onHashChange = () => setPage(getPageFromHash())
+    window.addEventListener('hashchange', onHashChange)
+    onHashChange()
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [page])
+
   return (
     <>
       <Preloader hide={plHide} />
-      <Navbar stuck={navStuck} />
-      <Hero />
-      <Ticker />
-      <ValuesBar />
-      <Stats />
-      <About />
-      <Services />
-      <Projects />
-      <Gallery />
-      <VideoSection />
-      <Process />
-      <Why />
-      <Clients />
-      <Testimonials />
-      <Contact />
-      <MapStrip />
+      <Navbar stuck={navStuck || !isHome} currentPage={page} />
+      {isHome ? (
+        <>
+          <Hero />
+          <Ticker />
+          <ValuesBar />
+          <Stats />
+          <About />
+          <Services />
+          <Projects />
+          <Gallery />
+          <VideoSection />
+          <Process />
+          <Why />
+          <Clients />
+          <Testimonials />
+          <Contact />
+          <MapStrip />
+        </>
+      ) : (
+        <AnimatedPage page={page} />
+      )}
       <Footer />
       <BackToTop vis={bttVis} />
       <ChatBot />

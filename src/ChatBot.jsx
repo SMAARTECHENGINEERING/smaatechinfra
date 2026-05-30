@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  FaCommentDots,
   FaPaperPlane,
-  FaRobot,
   FaTimes,
   FaVolumeMute,
   FaVolumeUp,
@@ -91,6 +89,23 @@ function getLocalReply(text) {
   ].join('\n')
 }
 
+function BotIcon({ small = false, active = false }) {
+  return (
+    <span className={`bot-icon${small ? ' small' : ''}${active ? ' active' : ''}`} aria-hidden="true">
+      <span className="bot-ear left" />
+      <span className="bot-ear right" />
+      <span className="bot-head">
+        <span className="bot-screen">
+          <span className="bot-eye left" />
+          <span className="bot-eye right" />
+          <span className="bot-smile" />
+        </span>
+      </span>
+      {!small && <span className="bot-body"><span /></span>}
+    </span>
+  )
+}
+
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [voice, setVoice] = useState(false)
@@ -169,7 +184,7 @@ export default function ChatBot() {
         <div className="chatbot-panel" role="dialog" aria-label="SmaaTech assistant">
           <div className="chatbot-head">
             <div className="chatbot-title">
-              <span className="chatbot-avatar"><FaRobot aria-hidden="true" /></span>
+              <span className="chatbot-avatar"><BotIcon small active={open} /></span>
               <span>
                 <strong>SmaaTech Assistant</strong>
                 <small>Online</small>
@@ -239,7 +254,7 @@ export default function ChatBot() {
         aria-label="Chat with SmaaTech assistant"
         aria-expanded={open}
       >
-        {open ? <FaTimes aria-hidden="true" /> : <FaCommentDots aria-hidden="true" />}
+        {open ? <FaTimes aria-hidden="true" /> : <BotIcon active />}
       </button>
 
       <style>{`
@@ -280,14 +295,16 @@ export default function ChatBot() {
         }
 
         .chatbot-avatar {
-          width: 36px;
-          height: 36px;
+          width: 38px;
+          height: 38px;
           border-radius: 50%;
-          background: #0a66c2;
+          background: linear-gradient(145deg, #f9fbff, #d9e4f6);
+          border: 1px solid rgba(255, 255, 255, .8);
           display: inline-flex;
           align-items: center;
           justify-content: center;
           flex: 0 0 auto;
+          box-shadow: inset 0 0 0 2px rgba(10, 102, 194, .12), 0 8px 20px rgba(10, 102, 194, .28);
         }
 
         .chatbot-title strong,
@@ -470,29 +487,214 @@ export default function ChatBot() {
           position: fixed;
           left: 22px;
           bottom: 24px;
-          width: 56px;
-          height: 56px;
+          width: 66px;
+          height: 66px;
           border-radius: 50%;
-          background: #071b33;
+          background: radial-gradient(circle at 35% 28%, #ffffff 0 18%, #dfe8f7 42%, #0a66c2 100%);
           color: #fff;
           border: 0;
           z-index: 2200;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.35rem;
-          box-shadow: 0 4px 18px rgba(7, 27, 51, .4);
+          box-shadow: 0 12px 28px rgba(7, 27, 51, .32), 0 0 0 8px rgba(10, 102, 194, .1);
           transition: transform .25s, background .25s;
         }
 
+        .chatbot-toggle::after {
+          content: '';
+          position: absolute;
+          inset: -7px;
+          border-radius: inherit;
+          border: 1px solid rgba(37, 217, 255, .35);
+          animation: botPulse 2.1s ease-out infinite;
+        }
+
         .chatbot-toggle:hover {
-          transform: translateY(-2px);
-          background: #0a66c2;
+          transform: translateY(-3px) scale(1.03);
+          background: radial-gradient(circle at 35% 28%, #ffffff 0 18%, #e8f7ff 42%, #071b33 100%);
+        }
+
+        .bot-icon {
+          position: relative;
+          width: 42px;
+          height: 50px;
+          display: inline-flex;
+          align-items: flex-start;
+          justify-content: center;
+          filter: drop-shadow(0 6px 8px rgba(7, 27, 51, .18));
+          transform-origin: 50% 100%;
+          animation: botFloat 2.8s ease-in-out infinite;
+        }
+
+        .bot-icon.small {
+          width: 28px;
+          height: 28px;
+          animation-duration: 3.2s;
+        }
+
+        .bot-head {
+          position: relative;
+          width: 39px;
+          height: 32px;
+          border-radius: 13px;
+          background: linear-gradient(145deg, #ffffff, #d8e2f2);
+          box-shadow: inset -3px -4px 7px rgba(7, 27, 51, .12), inset 2px 3px 7px rgba(255, 255, 255, .9);
+          z-index: 2;
+        }
+
+        .bot-icon.small .bot-head {
+          width: 25px;
+          height: 22px;
+          border-radius: 9px;
+        }
+
+        .bot-screen {
+          position: absolute;
+          inset: 7px 6px 6px;
+          border-radius: 9px;
+          background: #071b33;
+          overflow: hidden;
+          box-shadow: inset 0 0 10px rgba(0, 239, 207, .22);
+        }
+
+        .bot-icon.small .bot-screen {
+          inset: 5px 4px 4px;
+          border-radius: 6px;
+        }
+
+        .bot-eye {
+          position: absolute;
+          top: 6px;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #19f5d0;
+          box-shadow: 0 0 9px #19f5d0;
+          animation: botBlink 4s infinite;
+        }
+
+        .bot-icon.small .bot-eye {
+          top: 4px;
+          width: 4px;
+          height: 4px;
+        }
+
+        .bot-eye.left {
+          left: 7px;
+        }
+
+        .bot-eye.right {
+          right: 7px;
+        }
+
+        .bot-icon.small .bot-eye.left {
+          left: 5px;
+        }
+
+        .bot-icon.small .bot-eye.right {
+          right: 5px;
+        }
+
+        .bot-smile {
+          position: absolute;
+          left: 50%;
+          bottom: 5px;
+          width: 12px;
+          height: 7px;
+          border-bottom: 2px solid #19f5d0;
+          border-radius: 0 0 12px 12px;
+          transform: translateX(-50%);
+          box-shadow: 0 3px 8px rgba(25, 245, 208, .35);
+        }
+
+        .bot-icon.small .bot-smile {
+          bottom: 3px;
+          width: 8px;
+          height: 5px;
+          border-bottom-width: 1.5px;
+        }
+
+        .bot-ear {
+          position: absolute;
+          top: 9px;
+          width: 9px;
+          height: 18px;
+          border-radius: 8px;
+          background: linear-gradient(180deg, #20efff, #254bdb);
+          box-shadow: 0 0 10px rgba(32, 239, 255, .55);
+          z-index: 1;
+        }
+
+        .bot-icon.small .bot-ear {
+          top: 7px;
+          width: 6px;
+          height: 12px;
+        }
+
+        .bot-ear.left {
+          left: -2px;
+          transform: rotate(-12deg);
+        }
+
+        .bot-ear.right {
+          right: -2px;
+          transform: rotate(12deg);
+        }
+
+        .bot-body {
+          position: absolute;
+          top: 29px;
+          width: 30px;
+          height: 21px;
+          border-radius: 15px 15px 13px 13px;
+          background: linear-gradient(145deg, #ffffff, #d7e1f3);
+          box-shadow: inset -4px -5px 8px rgba(7, 27, 51, .12);
+          z-index: 1;
+        }
+
+        .bot-body span {
+          position: absolute;
+          left: 50%;
+          top: 6px;
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          transform: translateX(-50%);
+          background: #19f5d0;
+          border: 3px solid #3156e8;
+          box-shadow: 0 0 10px rgba(25, 245, 208, .65);
+        }
+
+        .chatbot-toggle:hover .bot-icon,
+        .bot-icon.active {
+          animation: botWave 1.4s ease-in-out infinite;
         }
 
         @keyframes chatbotTyping {
           0%, 60%, 100% { transform: translateY(0); opacity: .4; }
           30% { transform: translateY(-5px); opacity: 1; }
+        }
+
+        @keyframes botFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-3px) rotate(-1deg); }
+        }
+
+        @keyframes botWave {
+          0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+          35% { transform: translateY(-3px) rotate(-5deg) scale(1.03); }
+          70% { transform: translateY(-1px) rotate(5deg) scale(1.01); }
+        }
+
+        @keyframes botBlink {
+          0%, 46%, 52%, 100% { transform: scaleY(1); opacity: 1; }
+          49% { transform: scaleY(.15); opacity: .75; }
+        }
+
+        @keyframes botPulse {
+          0% { transform: scale(.86); opacity: .7; }
+          80%, 100% { transform: scale(1.18); opacity: 0; }
         }
 
         @media (max-width: 620px) {
