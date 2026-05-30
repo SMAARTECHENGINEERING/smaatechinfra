@@ -1030,8 +1030,13 @@ function Footer() {
 
           {/* Brand */}
           <div>
-            <div className="ftl">Smaa<span>Tech</span></div>
-            <div className="ft-sub">Infra &amp; Developer</div>
+            <div className="ft-brand">
+              <img src="/logo.png" alt="SmaaTech Logo" className="ft-logo-img" />
+              <div>
+                <div className="ftl">Smaa<span>Tech</span></div>
+                <div className="ft-sub">Infra &amp; Developer</div>
+              </div>
+            </div>
             <p className="fttg">A unit of SmaaTech Engineering Pvt. Ltd.<br />Building Trust. Creating Futures.</p>
             <div className="fts">
               {SOCIAL_LINKS.map(([label, href, Icon]) => (
