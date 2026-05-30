@@ -12,41 +12,83 @@ const API_URL = '/api/chat'
 const WHATSAPP = '7608061738'
 const WHATSAPP_URL = 'https://wa.me/917608061738'
 
-const QUICK_REPLIES = ['Services', 'Pricing', 'Contact', 'Location']
+const QUICK_REPLIES = ['Services', 'Company', 'Project process', 'Pricing']
 
 const BOT_KNOWLEDGE = [
   {
-    keys: ['service', 'services', 'kaam', 'work', 'building', 'interior', 'villa', 'land'],
+    keys: [
+      'company', 'smaatech', 'smaa tech', 'about', 'bare', 'baare', 'bara',
+      'kaun', 'who', 'profile', 'intro', 'introduction', 'trust',
+    ],
     reply:
-      'SmaaTech building construction, interior work, land sale and purchase, independent home/villa, aur premium interior design services provide karta hai.',
+      'SmaaTech Infra & Developer, SmaaTech Engineering Pvt. Ltd. ka unit hai. Company building construction, interior work, land sale-purchase aur independent home/villa projects par kaam karti hai. Focus quality material, transparent dealing, proper planning aur on-time handover par hai.',
   },
   {
-    keys: ['price', 'pricing', 'cost', 'rate', 'budget', 'estimate', 'quote'],
+    keys: ['service', 'services', 'kaam', 'work', 'kya karte', 'provide', 'offer'],
     reply:
-      'Pricing project size, location, design, material aur timeline par depend karti hai. Free consultation ke liye contact form ya WhatsApp par details bhej dijiye.',
+      'SmaaTech ki main services hain: building construction, complete interior work, land sale and purchase, independent home/villa construction, aur premium interior design. Aap requirement batayenge to team design, estimate aur execution plan suggest kar sakti hai.',
   },
   {
-    keys: ['contact', 'phone', 'call', 'number', 'whatsapp'],
+    keys: ['building', 'construction', 'ghar', 'house', 'home', 'residential', 'commercial', 'site', 'civil'],
+    reply:
+      'Building construction me SmaaTech residential aur commercial projects handle karta hai. Work me planning, material selection, skilled workforce, site execution, quality checking aur final handover include hota hai. Aap plot size, location aur floors batayenge to better guidance mil sakti hai.',
+  },
+  {
+    keys: ['interior', 'design', 'false ceiling', 'ceiling', 'kitchen', 'modular', 'wardrobe', 'tv unit', 'carpentry', 'flooring', 'painting'],
+    reply:
+      'Interior work me false ceiling, modular kitchen, wardrobe, TV unit, wall panel, flooring, carpentry, painting aur premium finishing ka work available hai. Design practical, clean aur client ke budget/lifestyle ke hisaab se plan kiya jata hai.',
+  },
+  {
+    keys: ['villa', 'independent', 'bungalow', 'duplex', 'farmhouse'],
+    reply:
+      'Independent home aur villa projects me SmaaTech concept planning se final handover tak support karta hai. Layout, elevation, material, construction timeline aur interior finish ko ek planned flow me execute kiya jata hai.',
+  },
+  {
+    keys: ['land', 'plot', 'property', 'sale', 'purchase', 'buy', 'sell', 'registry', 'document'],
+    reply:
+      'Land sale and purchase me SmaaTech transparent dealing, location guidance, pricing discussion aur document clarity par focus karta hai. Plot/property ke liye location, size aur purpose batane par team suitable guidance de sakti hai.',
+  },
+  {
+    keys: ['project', 'process', 'step', 'steps', 'kaise', 'start', 'shuru', 'planning', 'handover', 'timeline'],
+    reply:
+      'Project process simple hai: 1. consultation, 2. design and planning, 3. estimate and material discussion, 4. construction/interior execution, 5. quality check, 6. final handover. Isse client ko budget, timeline aur work progress clear rehta hai.',
+  },
+  {
+    keys: ['price', 'pricing', 'cost', 'rate', 'budget', 'estimate', 'quote', 'kitna', 'kharcha', 'charges'],
+    reply:
+      'Project cost size, location, design, material quality, number of floors/rooms aur finish level par depend karta hai. Accurate estimate ke liye project type, location, approximate area aur budget range share karna best rahega.',
+  },
+  {
+    keys: ['quality', 'material', 'guarantee', 'trust', 'transparent', 'delivery', 'time pe', 'on time'],
+    reply:
+      'SmaaTech ka focus quality you can trust, transparent dealing, customer satisfaction aur on-time delivery par hai. Project me material quality, skilled team, regular coordination aur stage-wise checking par dhyan diya jata hai.',
+  },
+  {
+    keys: ['contact', 'phone', 'call', 'number', 'whatsapp', 'email', 'mail', 'baat', 'talk'],
     reply: `Aap SmaaTech ko WhatsApp/call kar sakte hain: ${WHATSAPP}. Website contact form se bhi enquiry send kar sakte hain.`,
   },
   {
-    keys: ['location', 'address', 'where', 'office', 'map'],
+    keys: ['location', 'address', 'where', 'office', 'map', 'bhubaneswar', 'odisha', 'area'],
     reply:
       'SmaaTech Bhubaneswar, Odisha me services provide karta hai. Location ke liye page ke map section ko check karein.',
   },
   {
-    keys: ['time', 'hours', 'open', 'sunday'],
+    keys: ['time', 'hours', 'open', 'sunday', 'timing', 'kab'],
     reply: 'Working hours: Monday to Saturday, 9:00 AM to 7:00 PM. Sunday by appointment only.',
   },
 ]
 
 function getLocalReply(text) {
-  const clean = text.toLowerCase()
+  const clean = text.toLowerCase().replace(/[^\w\s]/g, ' ')
   const match = BOT_KNOWLEDGE.find(item => item.keys.some(key => clean.includes(key)))
 
   if (match) return match.reply
 
-  return `Is topic par best help ke liye SmaaTech team se directly WhatsApp karein: ${WHATSAPP}. Aap apna project type, location aur budget bhej sakte hain.`
+  return [
+    'SmaaTech aapke construction, interior, land, villa ya home project ke baare me guide kar sakta hai.',
+    'Aap project type, location, approximate area, floors/rooms aur budget range batayenge to main service, process aur next step clearly explain kar dunga.',
+    `Direct discussion ke liye WhatsApp/call: ${WHATSAPP}.`,
+  ].join('\n')
 }
 
 export default function ChatBot() {
@@ -58,7 +100,7 @@ export default function ChatBot() {
     {
       role: 'assistant',
       content:
-        'Namaste! Main SmaaTech assistant hoon. Services, pricing, contact ya location ke baare me pooch sakte hain.',
+        'Namaste! Main SmaaTech assistant hoon. Company, services, construction, interior, land, villa, pricing ya project process ke baare me pooch sakte hain.',
     },
   ])
   const endRef = useRef(null)
