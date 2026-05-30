@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import {
   FaPaperPlane,
   FaTimes,
-  FaVolumeMute,
-  FaVolumeUp,
 } from 'react-icons/fa'
 
 const API_URL = '/api/chat'
@@ -105,14 +103,14 @@ function BotIcon({ small = false, active = false }) {
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
-  const [voice, setVoice] = useState(false)
+  const [voice] = useState(true)
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [msgs, setMsgs] = useState([
     {
       role: 'assistant',
       content:
-        'Namaste! Main SmaaTech assistant hoon. Company, services, construction, interior, land, villa, pricing ya project process ke baare me pooch sakte hain.',
+        'Hello! I am SmaaTech AI Assistant. You can ask me about our company, services, construction, interior, land, villa, pricing, or project process.',
     },
   ])
   const endRef = useRef(null)
@@ -177,10 +175,6 @@ export default function ChatBot() {
     }
   }
 
-  const toggleVoice = () => {
-    setVoice(current => !current)
-    if (typeof window !== 'undefined') window.speechSynthesis?.cancel()
-  }
 
   return (
     <>
@@ -195,9 +189,6 @@ export default function ChatBot() {
               </span>
             </div>
             <div className="chatbot-actions">
-              <button type="button" onClick={toggleVoice} title="Voice on/off" aria-label="Toggle voice">
-                {voice ? <FaVolumeUp aria-hidden="true" /> : <FaVolumeMute aria-hidden="true" />}
-              </button>
               <button type="button" onClick={() => setOpen(false)} title="Close" aria-label="Close chat">
                 <FaTimes aria-hidden="true" />
               </button>
