@@ -136,9 +136,9 @@ export default function ChatBot() {
     utterance.rate = 0.92
     utterance.pitch = 1.1
     const voices = window.speechSynthesis.getVoices()
-    const preferred = voices.find(v => v.lang === 'en-IN' && v.name.toLowerCase().includes('female'))
+    const preferred = voices.find(v => v.name.toLowerCase().includes('spruce'))
+      || voices.find(v => v.lang === 'en-IN' && v.name.toLowerCase().includes('female'))
       || voices.find(v => v.lang === 'en-IN')
-      || voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'))
       || voices.find(v => v.lang.startsWith('en'))
     if (preferred) utterance.voice = preferred
     window.speechSynthesis.speak(utterance)
