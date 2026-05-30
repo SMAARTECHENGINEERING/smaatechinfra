@@ -132,6 +132,7 @@ input, select, textarea { font-family: var(--font-body); }
   box-shadow: 0 14px 30px rgba(10,102,194,.22);
 }
 .btn-g:hover { box-shadow: 0 18px 38px rgba(10,102,194,.32); transform: translateY(-2px); }
+.btn-g:disabled { opacity: .65; cursor: wait; transform: none; box-shadow: 0 14px 30px rgba(10,102,194,.16); }
 
 .btn-o {
   display: inline-flex; align-items: center; gap: 9px;

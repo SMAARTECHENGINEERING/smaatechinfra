@@ -30,8 +30,8 @@ npm install
 
 ### Step 2 — Start development server
 ```bash
-npm run dev
-```
+```npm run dev
+
 Open: **http://localhost:5173**
 
 ### Step 3 — Build for production

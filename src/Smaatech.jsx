@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './styles.css'
+import ChatBot from './ChatBot'
 import heroConstruction from './assets/hero-construction.jpg'
 import heroLiving from './assets/hero-living.jpg'
 import projectHome1 from './assets/project-home-1.jpg'
 import projectHome6 from './assets/project-home-6.jpg'
 import buildingResidentialFrontElevation from './assets/building/building-residential-front-elevation.jpg'
+import buildingPolishedFacadeWide from './assets/building/building-polished-facade-wide.png'
+import buildingPolishedFacadeDetail from './assets/building/building-polished-facade-detail.png'
 import interiorFalseCeilingLivingRoom from './assets/interior/interior-false-ceiling-living-room.jpg'
 import interiorFalseCeilingDetail from './assets/interior/interior-false-ceiling-detail.jpg'
 import interiorModularKitchenMint from './assets/interior/interior-modular-kitchen-mint.jpeg'
@@ -17,6 +20,11 @@ import interiorGeometricCeilingChandelier from './assets/interior/interior-geome
 import interiorModernTvPanelWood from './assets/interior/interior-modern-tv-panel-wood.jpeg'
 import interiorGreenCeilingWallPanel from './assets/interior/interior-green-ceiling-wall-panel.jpeg'
 import interiorWoodenFeatureWallUnit from './assets/interior/interior-wooden-feature-wall-unit.jpeg'
+import interiorPurpleFalseCeiling from './assets/interior/interior-purple-false-ceiling.png'
+import interiorWoodenWardrobe from './assets/interior/interior-wooden-wardrobe.png'
+import interiorPoojaWallPanel from './assets/interior/interior-pooja-wall-panel.jpeg'
+import interiorCeilingLightCorridor from './assets/interior/interior-ceiling-light-corridor.jpeg'
+import interiorLivingTvPartition from './assets/interior/interior-living-tv-partition.jpeg'
 import {
   FaArrowRight,
   FaArrowUp,
@@ -56,6 +64,8 @@ const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 const WHATSAPP_URL = 'https://wa.me/917608061738'
 const WHATSAPP_ENQUIRY_URL = `${WHATSAPP_URL}?text=${encodeURIComponent("Hi SmaaTech! I'm interested in your services.")}`
 const ENQUIRY_EMAIL = 'Info@smaatechengineering.com'
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 const SOCIAL_LINKS = [
   ['Instagram', COMPANY_URL, FaInstagram],
   ['LinkedIn', COMPANY_URL, FaLinkedinIn],
@@ -82,10 +92,17 @@ const SERVICES = [
 ]
 
 const PROJECTS = [
-  { cat: 'Building', label: 'Building · Residential Elevation', title: 'Residential Front Elevation', img: buildingResidentialFrontElevation, wide: true },
+  { cat: 'Building', label: 'Building - Completed Facade', title: 'Completed Residential Building', img: buildingPolishedFacadeWide, wide: true },
+  { cat: 'Building', label: 'Building - Facade Elevation', title: 'Residential Building Facade', img: buildingPolishedFacadeDetail },
+  { cat: 'Building', label: 'Building · Residential Elevation', title: 'Residential Front Elevation', img: buildingResidentialFrontElevation },
   { cat: 'Building', label: 'Building · Bhubaneswar Site', title: 'Residential Site Execution', img: heroConstruction },
   { cat: 'Villa', label: 'Villa · Odisha Home Project', title: 'Independent Villa Development', img: projectHome1 },
   { cat: 'Building', label: 'Building · Home Elevation', title: 'Modern Residential Elevation', img: projectHome6 },
+  { cat: 'Interior', label: 'Interior - False Ceiling Work', title: 'Purple Cove False Ceiling', img: interiorPurpleFalseCeiling },
+  { cat: 'Interior', label: 'Interior - Wardrobe Design', title: 'Wooden Wardrobe Interior', img: interiorWoodenWardrobe },
+  { cat: 'Interior', label: 'Interior - Decorative Panel', title: 'Pooja Wall Panel Design', img: interiorPoojaWallPanel },
+  { cat: 'Interior', label: 'Interior - Ceiling Lighting', title: 'Ceiling Light Corridor', img: interiorCeilingLightCorridor },
+  { cat: 'Interior', label: 'Interior - Living Room Partition', title: 'Living Room TV Partition', img: interiorLivingTvPartition },
   { cat: 'Interior', label: 'Interior · False Ceiling Work', title: 'Premium False Ceiling Interior', img: interiorFalseCeilingLivingRoom },
   { cat: 'Interior', label: 'Interior · Ceiling Light Detail', title: 'False Ceiling Light Design', img: interiorFalseCeilingDetail },
   { cat: 'Interior', label: 'Interior · Modular Kitchen', title: 'Mint Modular Kitchen Design', img: interiorModularKitchenMint },
@@ -103,9 +120,9 @@ const PROJECTS = [
 const GALLERY = [
   { cls: 'gi tall', src: heroConstruction, lbl: 'On-Site Construction' },
   { cls: 'gi',      src: projectHome6,     lbl: 'Elevation Review'     },
-  { cls: 'gi',      src: interiorModularKitchenMint, lbl: 'Modular Kitchen'      },
+  { cls: 'gi',      src: interiorPurpleFalseCeiling, lbl: 'False Ceiling'      },
   { cls: 'gi wide', src: projectHome1,     lbl: 'Villa Development'    },
-  { cls: 'gi',      src: interiorFalseCeilingDetail, lbl: 'Ceiling Light Detail' },
+  { cls: 'gi',      src: interiorLivingTvPartition, lbl: 'Living Room Interior' },
 ]
 
 const STEPS = [
@@ -759,6 +776,7 @@ const EMPTY_FORM = { name: '', phone: '', email: '', service: '', details: '' }
 function Contact() {
   const [form, setForm] = useState(EMPTY_FORM)
   const [msg,  setMsg]  = useState({ text: '', type: '' })
+  const [sending, setSending] = useState(false)
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
 
@@ -808,15 +826,47 @@ function Contact() {
     if (!validateCleanForm(clean)) e.preventDefault()
   }
 
-  const handleMailSubmit = e => {
+  const handleMailSubmit = async e => {
     e.preventDefault()
     const clean = getCleanForm()
     if (!validateCleanForm(clean)) return
 
-    window.open(getEmailComposeUrl(clean), '_blank', 'noopener,noreferrer')
-    setMsg({ text: 'Email draft is ready in Gmail. Please tap Send to share it with us.', type: 'ok' })
-    setForm(EMPTY_FORM)
-    setTimeout(() => setMsg({ text: '', type: '' }), 7000)
+    if (!WEB3FORMS_KEY) {
+      setMsg({ text: 'Form key is not set yet. Please use the email link below or WhatsApp us directly.', type: 'err' })
+      setTimeout(() => setMsg({ text: '', type: '' }), 7000)
+      return
+    }
+
+    setSending(true)
+    setMsg({ text: '', type: '' })
+
+    try {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: clean.service ? `SmaaTech Project Enquiry - ${clean.service}` : 'SmaaTech Project Enquiry',
+          from_name: clean.name,
+          name: clean.name,
+          phone: clean.phone,
+          email: clean.email,
+          service: clean.service,
+          message: clean.details,
+        }),
+      })
+      const data = await res.json()
+
+      if (!res.ok || !data.success) throw new Error(data.message || 'Submission failed')
+
+      setMsg({ text: 'Thank you! Your enquiry has been sent successfully.', type: 'ok' })
+      setForm(EMPTY_FORM)
+    } catch (error) {
+      setMsg({ text: 'Message could not be sent right now. Please try again or use the email link below.', type: 'err' })
+    } finally {
+      setSending(false)
+      setTimeout(() => setMsg({ text: '', type: '' }), 7000)
+    }
   }
 
   return (
@@ -849,30 +899,30 @@ function Contact() {
               <div className="cof-g">
                 <div className="fg rv">
                   <label htmlFor="f-name">Full Name *</label>
-                  <input id="f-name" type="text" placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required />
+                  <input id="f-name" name="name" type="text" placeholder="Your full name" value={form.name} onChange={e => set('name', e.target.value)} required />
                 </div>
                 <div className="fg rv d1">
                   <label htmlFor="f-phone">Phone *</label>
-                  <input id="f-phone" type="tel" placeholder="+91 XXXXX XXXXX" value={form.phone} onChange={e => set('phone', e.target.value)} required />
+                  <input id="f-phone" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" value={form.phone} onChange={e => set('phone', e.target.value)} required />
                 </div>
                 <div className="fg rv d2">
                   <label htmlFor="f-email">Email Address</label>
-                  <input id="f-email" type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} />
+                  <input id="f-email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={e => set('email', e.target.value)} />
                 </div>
                 <div className="fg rv d3">
                   <label htmlFor="f-svc">Service Required *</label>
-                  <select id="f-svc" value={form.service} onChange={e => set('service', e.target.value)} required>
+                  <select id="f-svc" name="service" value={form.service} onChange={e => set('service', e.target.value)} required>
                     <option value="" disabled>Select a service</option>
                     {SERVICES.map(s => <option key={s.title}>{s.title}</option>)}
                   </select>
                 </div>
                 <div className="fg full rv">
                   <label htmlFor="f-det">Project Details</label>
-                  <textarea id="f-det" placeholder="Tell us about your project — type, size, location, budget..." value={form.details} onChange={e => set('details', e.target.value)} />
+                  <textarea id="f-det" name="message" placeholder="Tell us about your project — type, size, location, budget..." value={form.details} onChange={e => set('details', e.target.value)} />
                 </div>
                 <div className="full">
-                  <button type="submit" className="btn-g" style={{ width: '100%', justifyContent: 'center', padding: '15px', fontSize: '.9rem' }}>
-                    Send Enquiry <FaArrowRight aria-hidden="true" />
+                  <button type="submit" className="btn-g" disabled={sending} style={{ width: '100%', justifyContent: 'center', padding: '15px', fontSize: '.9rem' }}>
+                    {sending ? 'Sending...' : 'Send Enquiry'} <FaArrowRight aria-hidden="true" />
                   </button>
                   <a
                     className="mail-fallback"
@@ -1076,6 +1126,7 @@ export default function SmaaTech() {
       <MapStrip />
       <Footer />
       <BackToTop vis={bttVis} />
+      <ChatBot />
       <WhatsApp />
     </>
   )
