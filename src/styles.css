@@ -457,7 +457,6 @@ input, select, textarea { font-family: var(--font-body); }
     font-size: .96rem;
   }
   .tin {
-    grid-template-columns: 1fr;
     min-height: 0;
   }
   .tmedia {
@@ -1914,8 +1913,7 @@ textarea:focus-visible {
 
   .svc,
   .prs,
-  .wyc,
-  .tin {
+  .wyc {
     padding: 28px 22px;
   }
 
@@ -1952,6 +1950,10 @@ textarea:focus-visible {
 @media (max-width: 480px) {
   .nav-logo {
     font-size: 1.18rem;
+  }
+  .nav-logo-img {
+    width: 36px;
+    height: 36px;
   }
 
   .nav-logo em {
