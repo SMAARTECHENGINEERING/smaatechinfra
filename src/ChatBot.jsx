@@ -133,7 +133,14 @@ export default function ChatBot() {
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(text.replace(/[^\w\s.,!?:/-]/g, ''))
     utterance.lang = 'en-IN'
-    utterance.rate = 1
+    utterance.rate = 0.92
+    utterance.pitch = 1.1
+    const voices = window.speechSynthesis.getVoices()
+    const preferred = voices.find(v => v.lang === 'en-IN' && v.name.toLowerCase().includes('female'))
+      || voices.find(v => v.lang === 'en-IN')
+      || voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'))
+      || voices.find(v => v.lang.startsWith('en'))
+    if (preferred) utterance.voice = preferred
     window.speechSynthesis.speak(utterance)
   }
 
@@ -183,7 +190,7 @@ export default function ChatBot() {
             <div className="chatbot-title">
               <span className="chatbot-avatar"><BotIcon small active={open} /></span>
               <span>
-                <strong>SmaaTech Assistant</strong>
+                <strong>SmaaTech AI Assistant</strong>
                 <small>Online</small>
               </span>
             </div>
