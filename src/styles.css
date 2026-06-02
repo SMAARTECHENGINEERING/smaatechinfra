@@ -246,6 +246,9 @@ input, select, textarea { font-family: var(--font-body); }
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 .nav.sk .nav-links a { color: var(--ink2); }
 .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .3s; }
