@@ -316,7 +316,7 @@ function Hero() {
       <div className="h-ov" />
       <div className="h-lines" />
       <div className="h-c">
-        <div className="hpill">A Unit of SmaaTech Engineering Pvt. Ltd.</div>
+
         <h1 className="hh1">Build Smarter<br /><em>With SmaaTech</em></h1>
         <p className="h-sub">Infra &amp; Developer</p>
         <p className="hp">
@@ -467,9 +467,7 @@ function About() {
             <span className="rule" />
             <span className="lbl">About SmaaTech</span>
             <h2 className="ttl">Building Trust.<br />Creating Futures.</h2>
-            <p style={{ fontWeight: 700, color: 'var(--gold)', fontSize: '.88rem', letterSpacing: '.05em', textTransform: 'uppercase', marginBottom: '14px' }}>
-              A Unit of SmaaTech Engineering Pvt. Ltd.
-            </p>
+
             <p className="sub">
               SmaaTech Infra &amp; Developer is Bhubaneswar's trusted name in building construction,
               interior design, and real estate. We transform your dreams into reality with quality,
@@ -1037,7 +1035,7 @@ function Footer() {
                 <div className="ft-sub">Infra &amp; Developer</div>
               </div>
             </div>
-            <p className="fttg">A unit of SmaaTech Engineering Pvt. Ltd.<br />Building Trust. Creating Futures.</p>
+            <p className="fttg">Building Trust. Creating Futures.</p>
             <div className="fts">
               {SOCIAL_LINKS.map(([label, href, Icon]) => (
                 <a key={label} href={href} className="fsa" aria-label={label} target="_blank" rel="noopener noreferrer"><Icon aria-hidden="true" /></a>
