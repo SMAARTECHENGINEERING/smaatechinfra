@@ -985,26 +985,28 @@ input, select, textarea { font-family: var(--font-body); }
 .vb-grid {
   max-width: 1200px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 36px);
   display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 1px; background: rgba(255,255,255,.08);
+  gap: 1px; background: rgba(255,255,255,.14);
 }
 .vbi { display: flex; align-items: center; gap: 12px; padding: 18px 20px; background: var(--navy); transition: background .3s; }
-.vbi:hover { background: rgba(255,255,255,.04); }
-.vbi-ico { font-size: 1.4rem; flex-shrink: 0; }
+.vbi:hover { background: rgba(255,255,255,.08); }
+.vbi:hover .vbi-ico { color: #fff; }
+.vbi-ico { font-size: 1.5rem; flex-shrink: 0; color: var(--gold); transition: color .3s; }
 .vbi-txt {
   font-family: var(--font-body);
-  font-size: .65rem;
+  font-size: .68rem;
   font-weight: var(--fw-light);
-  color: rgba(255,255,255,.48);
+  color: rgba(255,255,255,.78);
   line-height: 1.6;
   letter-spacing: 0.02em;
 }
 .vbi-txt strong {
   display: block;
-  color: var(--gl);
-  font-size: .72rem;
+  color: #fff;
+  font-size: .75rem;
   font-weight: var(--fw-semi);
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
+  margin-bottom: 2px;
 }
 @media (max-width: 960px) { .vb-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .vb-grid { grid-template-columns: repeat(2, 1fr); } }
