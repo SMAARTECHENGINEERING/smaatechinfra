@@ -1077,7 +1077,7 @@ input, select, textarea { font-family: var(--font-body); }
 
 /* ---- SERVICES ---- */
 #services { background: var(--gp); }
-.svc-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+.svc-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
 .svc { background: #fff; padding: 48px 40px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; border-bottom: 3px solid transparent; }
 .svc { transform-style: preserve-3d; box-shadow: 0 16px 42px rgba(6,36,70,.06); }
 .svc:hover { transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 24px 58px rgba(10,102,194,.14); border-bottom-color: var(--gold); }
