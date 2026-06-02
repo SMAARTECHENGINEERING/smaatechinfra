@@ -1478,8 +1478,8 @@ input, select, textarea { font-family: var(--font-body); }
 .tav { width: clamp(44px, 11vw, 58px); height: clamp(44px, 11vw, 58px); border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 10px 24px rgba(6,36,70,.16); }
 .tctrl { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; }
 .tdt { display: flex; justify-content: center; gap: 9px; margin-top: 0; }
-.tdot { width: 10px; height: 10px; border-radius: 999px; background: var(--br2); cursor: pointer; transition: background .3s, transform .3s, width .3s; border: none; padding: 0; }
-.tdot.a { width: 34px; background: var(--gold); transform: none; }
+.tdot { width: 7px; height: 7px; border-radius: 999px; background: var(--br2); cursor: pointer; transition: background .3s, transform .3s, width .3s; border: none; padding: 0; }
+.tdot.a { width: 22px; background: var(--gold); transform: none; }
 .tarr {
   width: 44px;
   height: 44px;
