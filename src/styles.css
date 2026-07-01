@@ -202,7 +202,7 @@ input, select, textarea { font-family: var(--font-body); }
   width: 48px;
   height: 48px;
   object-fit: contain;
-  border-radius: 50%;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 .nav-logo-text {
@@ -1530,7 +1530,7 @@ input, select, textarea { font-family: var(--font-body); }
 #ft { background: var(--navy); padding: 72px 0 0; }
 .ftg { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
 .ft-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
-.ft-logo-img { width: 56px; height: 56px; object-fit: contain; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(255,255,255,.18); }
+.ft-logo-img { width: 56px; height: 56px; object-fit: contain; border-radius: 8px; flex-shrink: 0; border: 2px solid rgba(255,255,255,.18); }
 .ftl { font-family: var(--font-head); font-size: 1.75rem; font-weight: var(--fw-black); color: #fff; letter-spacing: -0.04em; }
 .ftl span { color: var(--gold); font-style: italic; }
 .ft-sub { font-family: var(--font-body); font-size: .62rem; font-weight: var(--fw-med); color: rgba(255,255,255,.7); margin-top: 5px; letter-spacing: var(--ls-wider); text-transform: uppercase; }

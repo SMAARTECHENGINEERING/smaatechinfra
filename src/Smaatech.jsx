@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './styles.css'
 import ChatBot from './ChatBot'
+import companyLogo from './assets/logo.png'
 import heroConstruction from './assets/hero-construction.jpg'
 import heroLiving from './assets/hero-living.jpg'
 import projectHome1 from './assets/project-home-1.jpg'
@@ -284,7 +285,7 @@ function Navbar({ stuck, currentPage }) {
     <nav className={`nav${stuck ? ' sk' : ''}`}>
       <div className="nav-in">
         <a href="#/" className="nav-logo" onClick={close}>
-          <img src="/logo.png" alt="SmaaTech Logo" className="nav-logo-img" />
+          <img src={companyLogo} alt="SmaaTech Logo" className="nav-logo-img" />
           <span className="nav-logo-text">Smaa<span>Tech</span><em>Infra &amp; Developer</em></span>
         </a>
         <div className={`nav-links${open ? ' open' : ''}`}>
@@ -1029,7 +1030,7 @@ function Footer() {
           {/* Brand */}
           <div>
             <div className="ft-brand">
-              <img src="/logo.png" alt="SmaaTech Logo" className="ft-logo-img" />
+              <img src={companyLogo} alt="SmaaTech Logo" className="ft-logo-img" />
               <div>
                 <div className="ftl">Smaa<span>Tech</span></div>
                 <div className="ft-sub">Infra &amp; Developer</div>
