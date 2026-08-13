@@ -1,0 +1,6 @@
+# robots.txt for SmaaTech Engineering & Infra
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.smaatechengineering.com/sitemap.xml
